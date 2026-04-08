@@ -1,4 +1,5 @@
 // add javascript here
+let guesses = 0;
 let wins = 0;
 let name = prompt("Gimme your name and personal information: ")
 let casedName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase(); 
@@ -40,6 +41,10 @@ document.getElementById("playBtn").addEventListener("click", startGame);
         else if (Math.abs(guess - number) > 5) {
             document.getElementById("msg").textContent += ", you are cold"
         }
+        guesses++;
+        average_score = (guesses / (wins)).toFixed(2);
+        console.log(guesses)
+        console.log(wins)
     }
     else if (guess > number) {
         document.getElementById("msg").textContent = "Too high!"
@@ -52,17 +57,26 @@ document.getElementById("playBtn").addEventListener("click", startGame);
         else if (Math.abs(guess - number) > 5) {
             document.getElementById("msg").textContent += ", you are cold"
         }
+        guesses++;
+        average_score = (guesses / (wins)).toFixed(2);
+        console.log(guesses)
+        console.log(wins)
     }
     else if (guess == number) {
         document.getElementById("msg").textContent = "You got it!"
         wins++;
         document.getElementById("wins").textContent = "Total wins: " + wins;
+        document.getElementById("avgScore").textContent = "Average score: " + average_score;
         document.getElementById("playBtn").disabled = false;
         document.getElementById("guessBtn").disabled = true;
         document.getElementById("giveUpBtn").disabled = true;
         document.getElementById("e").disabled = false;
         document.getElementById("m").disabled = false;
         document.getElementById("h").disabled = false;
+        guesses++;
+        average_score = (guesses / (wins)).toFixed(2);
+        console.log(guesses)
+        console.log(wins)
     }
     
     
