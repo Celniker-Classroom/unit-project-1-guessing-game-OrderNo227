@@ -1,10 +1,10 @@
 // add javascript here
 // --- Initial Variables ---
+let now = new Date();
 let guesses = 0;
 let wins = 0;
 let leaderboard = []; 
-// Keep the name prompt and formatting logic
-let goofy_name = prompt("Gimme your name: ");
+let goofy_name = prompt("Gimme your name and personal information: ");
 let casedName = goofy_name ? (goofy_name.charAt(0).toUpperCase() + goofy_name.slice(1).toLowerCase()) : "Player";
 
 var difficulty = null;
@@ -24,9 +24,7 @@ function startGame() {
     number = Math.floor(Math.random() * range) + 1;
     guesses = 0; 
 
-    // Uses the name for the personalized greeting
     document.getElementById("msg").textContent = "Hi, " + casedName + "! Guess the number between 1 and " + range;
-    
     document.getElementById("guessBtn").disabled = false;
     document.getElementById("playBtn").disabled = true;
     document.getElementById("giveUpBtn").disabled = false;
@@ -69,9 +67,7 @@ function checkGuess() {
         document.getElementById("wins").textContent = "Total wins: " + wins;
         document.getElementById("avgScore").textContent = "Average score: " + average_score;
         
-        // Save only the number of guesses to the leaderboard array
         leaderboard.push(guesses);
-
         updateLeaderboardUI();
         resetUI();
     }
@@ -79,6 +75,14 @@ function checkGuess() {
 
 function cooked() {
     document.getElementById("msg").textContent = "The number was " + number;
+    
+    // Logic for Medium difficulty (range 20)
+    if (range === 20) {
+        leaderboard.push(10);
+        updateLeaderboardUI();
+    }
+
+    guesses = range; 
     resetUI();
 }
 
@@ -93,19 +97,16 @@ function resetUI() {
 }
 
 function updateLeaderboardUI() {
-    // Numeric sort: smallest number of guesses first
     leaderboard.sort(function(a, b) {
         return a - b;
     });
 
     var leaderboardItems = document.querySelectorAll("li[name='leaderboard']");
     
-    // Clear the list items
     for (let item of leaderboardItems) {
         item.textContent = "";
     }
 
-    // Fill the list items with ONLY the scores
     for (let i = 0; i < leaderboard.length && i < leaderboardItems.length; i++) {
         leaderboardItems[i].textContent = leaderboard[i] + " guesses";
     }
