@@ -1,5 +1,5 @@
 // add javascript here
-let now = new Date();
+// --- Initial Variables ---
 let guesses = 0;
 let wins = 0;
 let leaderboard = []; 
@@ -66,7 +66,7 @@ function checkGuess() {
         document.getElementById("wins").textContent = "Total wins: " + wins;
         document.getElementById("avgScore").textContent = "Average score: " + average_score;
         
-        // Push an object instead of a string to make sorting possible
+        // Add current win to the leaderboard array as an object
         leaderboard.push({
             name: casedName,
             score: guesses
@@ -93,19 +93,19 @@ function resetUI() {
 }
 
 function updateLeaderboardUI() {
-    // Sort numerically by the score property (lowest guesses first)
+    // Sort numerically by score (lowest number of guesses is better)
     leaderboard.sort(function(a, b) {
         return a.score - b.score;
     });
 
     var leaderboardItems = document.querySelectorAll("li[name='leaderboard']");
     
-    // Clear the UI list first
+    // Reset all list items to be blank first
     for (let item of leaderboardItems) {
         item.textContent = "";
     }
 
-    // Fill the UI list with the sorted results
+    // Only fill the slots that have actual data in the leaderboard array
     for (let i = 0; i < leaderboard.length && i < leaderboardItems.length; i++) {
         leaderboardItems[i].textContent = leaderboard[i].name + ": " + leaderboard[i].score + " guesses";
     }
