@@ -1,0 +1,2 @@
+For above and beyond features, I added CSS styling to make viewing the website smoother. 
+If the user were to enter an input that wasn't a number or was outside of the range, the code will return an error to the player, telling it to provide a proper input. 
